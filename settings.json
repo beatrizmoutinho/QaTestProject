@@ -1,0 +1,9 @@
+{
+  "baseUrl": "https://main.d31l8y34egt1nb.amplifyapp.com/",
+  "loginUrl": "https://j25m87y4z7.execute-api.eu-west-2.amazonaws.com/dev/todos?user=*",
+  "backendUrl": "https://j25m87y4z7.execute-api.eu-west-2.amazonaws.com/dev",
+  "user": "Dohobor",
+  "password": "1234567890Aa!",
+  "email": "dohobor280@gamintor.com",
+  "token": ""
+}
