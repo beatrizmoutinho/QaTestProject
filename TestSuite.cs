@@ -53,15 +53,15 @@ namespace TestSuite
             int thCountExpected = 30;
             bool testCountTodosOk = thCountExpected == thCountReal;
 
-            Console.WriteLine($"Actual todos ('{thCountReal}') vs expected todos ('{thCountExpected}') ({testCountTodosOk})");
+            Console.WriteLine($"Actual todos '{thCountReal}' vs expected todos '{thCountExpected}' ({testCountTodosOk})");
 
-            bool testLasTodoOk = !await Page.Locator("[class='todo-details']").GetByText(lastTodo).IsVisibleAsync();
+            bool testLastTodoOk = !await Page.Locator("[class='todo-details']").Nth(29).GetByText(lastTodo).IsVisibleAsync();
 
-            Console.WriteLine($"The last todo inserted does not appear when the maximum limit is reached ({testLasTodoOk})");
+            Console.WriteLine($"The last todo inserted does not appear when the maximum limit is reached ({testLastTodoOk})");
 
             //************* End Test *************
             ClassicAssert.IsTrue(testCountTodosOk, $"The number of todos in the list '{thCountReal}' does not match the expected maximum '{thCountExpected}'");
-            ClassicAssert.IsTrue(testLasTodoOk, $"The last todo inserted should not appear when the maximum number of todos is achieved");
+            ClassicAssert.IsTrue(testLastTodoOk, $"The last todo inserted should not appear when the maximum number of todos is achieved");
         }
 
         [Test, Order(2)]
@@ -215,11 +215,13 @@ namespace TestSuite
 
             string title = "Title_"; string detail = "Detail_";
             string lastInsertTodo = "";
+            int count = 0;
             Random random = new Random();
-            int num = random.Next(1, 999);
             for (int i = 0; i < maxTodos; i++)
             {
-                Console.WriteLine($"Create {i + 1} todo:");
+                int num = random.Next(1, 2000);
+
+                Console.WriteLine($"Create a todo:");
                 Console.WriteLine($"    Fill title: {title}{num}");
                 await Page.Locator("#title").FillAsync($"{title}{num}");
 
@@ -228,11 +230,11 @@ namespace TestSuite
 
                 await Page.Locator("[type='submit']").ClickAsync();
 
-                if (i == maxTodos - 1)
+                if (count == maxTodos - 1)
                 {
                     lastInsertTodo = $"{detail}{num}";
                 }
-                i++;
+                count++;
             }
 
             return lastInsertTodo;
