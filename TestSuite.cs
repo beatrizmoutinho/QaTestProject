@@ -149,14 +149,12 @@ namespace TestSuite
             string url = root.GetProperty("baseUrl").GetString();
             string loginUrl = root.GetProperty("loginUrl").GetString();
             string user = root.GetProperty("user").GetString();
-            string email = root.GetProperty("email").GetString();
             string password = root.GetProperty("password").GetString();
 
             envVariables.Add(url);
             envVariables.Add(loginUrl);
             envVariables.Add(user);
             envVariables.Add(password);
-            envVariables.Add(email);
 
             return envVariables;
         }
